@@ -1,0 +1,30 @@
+{
+    "name": "pilulka-distribuce/holiday-provider",
+    "description": "Provides holiday for various countries",
+    "type": "library",
+    "require": {
+        "php": "7.1 - 8.0",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "azuyalabs/yasumi": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "*",
+        "phpstan/phpstan": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "HolidayProvider\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ProfiSmsPhpSender\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "unit": "vendor/bin/phpunit tests",
+        "stan": "vendor/bin/phpstan analyse src tests --level=8"
+    },
+    "license": "proprietary"
+}
