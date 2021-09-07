@@ -1,0 +1,10 @@
+language: php
+sudo: false
+dist: trusty
+php:
+    - '7.1'
+install:
+    - composer install
+script:
+    - vendor/bin/phpstan --memory-limit=-1 analyse src tests --level=8
+    - vendor/bin/phpunit tests

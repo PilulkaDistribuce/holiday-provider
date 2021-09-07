@@ -3,12 +3,10 @@
     "description": "Provides holiday for various countries",
     "type": "library",
     "require": {
-        "php": "7.1 - 8.0",
-        "ext-curl": "*",
-        "ext-json": "*",
-        "azuyalabs/yasumi": "*"
+        "php": "7.1 - 8.0"
     },
     "require-dev": {
+        "azuyalabs/yasumi": "*",
         "phpunit/phpunit": "*",
         "phpstan/phpstan": "*"
     },
