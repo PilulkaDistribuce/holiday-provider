@@ -509,4 +509,12 @@ class HolidayProvider
 
         return $this->isHoliday($dateTime);
     }
+
+    /**
+     * @return string[] in DateTimeInterface->format('Y-m-d')
+     */
+    public function findAllHolidays(): array
+    {
+        return $this->holidays;
+    }
 }
