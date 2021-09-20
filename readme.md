@@ -1,7 +1,7 @@
 ## Install
 
 ```shell
-composer require  PilulkaDistribuce/holiday-provider
+composer require pilulka-distribuce/holiday-provider
 ```
 
 ## Usage
