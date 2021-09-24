@@ -166,6 +166,7 @@ class HolidayProvider
         '2021 Slovak National Uprising Day' => '2021-08-29',
         '2021 Day of the Constitution of the Slovak Republic' => '2021-09-01',
         '2021 Our Lady of Sorrows Day' => '2021-09-15',
+        '2021 Moving holiday' => '2021-09-24',
         '2021 All Saints\' Day' => '2021-11-01',
         '2021 Struggle for Freedom and Democracy Day' => '2021-11-17',
         '2021 Christmas Eve' => '2021-12-24',
