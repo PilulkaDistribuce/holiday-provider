@@ -16,8 +16,10 @@ class HolidayProviderTest extends TestCase
 {
     /** @var HolidayProvider */
     private $holidayProviderCz;
+
     /** @var HolidayProvider */
     private $holidayProviderSk;
+
     /** @var HolidayProvider */
     private $holidayProviderRo;
 
@@ -131,7 +133,7 @@ class HolidayProviderTest extends TestCase
             '2021 shifting easter green thursday' => [new DateTime('2021-04-01'), false],
             '2021 shifting easter monday' => [new DateTime('2021-04-05'), true],
             '2021 saint Stephen\'s day' => [new DateTime('2021-12-26'), true],
-            '2021 New Years Eve' => [new DateTime('2021-12-31'), false],
+            '2021 New Years Eve' => [new DateTime('2021-12-31'), true],
             'no holiday saturday' => [new DateTime('2021-09-04'), false],
             'no holiday sunday' => [new DateTime('2021-09-05'), false],
         ];
@@ -172,7 +174,7 @@ class HolidayProviderTest extends TestCase
                 return '\''.$holiday->format('Y').' '.str_replace('\'', '\\\'', $holiday->getName())
                     .'\' => \''.$holiday->format('Y-m-d').'\','.PHP_EOL;
             }, $holidayDates);
-    
+
             file_put_contents('data.txt', $holidayDates, FILE_APPEND);
         }
     }
