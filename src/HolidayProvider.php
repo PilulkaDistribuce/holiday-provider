@@ -11,6 +11,9 @@ class HolidayProvider
     public const COUNTRY_CZ = 'cz';
     public const COUNTRY_SK = 'sk';
     public const COUNTRY_RO = 'ro';
+    public const COUNTRY_AT = 'at';
+    public const COUNTRY_DE = 'de';
+    public const COUNTRY_HU = 'hu';
 
     private const HOLIDAYS_CZ = [
         '2021 Day of renewal of the independent Czech state' => '2021-01-01',
@@ -485,6 +488,11 @@ class HolidayProvider
             case 'Slovakia':
             case 'SlovakRepublic':
                 $this->holidays = self::HOLIDAYS_SK;
+                break;
+            case self::COUNTRY_DE:
+            case self::COUNTRY_HU:
+            case self::COUNTRY_AT:
+                $this->holidays = [];
                 break;
             case self::COUNTRY_RO:
             case 'RO':
