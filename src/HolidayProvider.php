@@ -185,6 +185,7 @@ class HolidayProvider
         '2022 Slovak National Uprising Day' => '2022-08-29',
         '2022 Day of the Constitution of the Slovak Republic' => '2022-09-01',
         '2022 Our Lady of Sorrows Day' => '2022-09-15',
+        '2022 Stock taking' => '2022-10-07',
         '2022 All Saints\' Day' => '2022-11-01',
         '2022 Struggle for Freedom and Democracy Day' => '2022-11-17',
         '2022 Christmas Eve' => '2022-12-24',
