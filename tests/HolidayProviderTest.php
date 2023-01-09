@@ -199,6 +199,7 @@ class HolidayProviderTest extends TestCase
         return [
             'weekend over new year' => [new DateTimeImmutable('2021-12-31'), 2, new DateTimeImmutable('2022-01-04')],
             '2023 workers day' => [new DateTimeImmutable('2023-04-30'), 3, new DateTimeImmutable('2023-05-04')],
+            'max increment' => [new DateTimeImmutable('2023-04-30'), 99999, new DateTimeImmutable('2406-12-06')],
         ];
     }
 }

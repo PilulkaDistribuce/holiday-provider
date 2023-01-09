@@ -535,7 +535,7 @@ class HolidayProvider
         DateTimeInterface $dateTime,
         int $incrementByDays
     ): DateTimeImmutable {
-        if ($incrementByDays < 1) {
+        if ($incrementByDays < 1 || $incrementByDays > 99999) {
             throw new InvalidArgumentException('Increment days must be higher than 0');
         }
 
