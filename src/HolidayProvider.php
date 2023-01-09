@@ -7,6 +7,7 @@ namespace HolidayProvider;
 use DateTime;
 use DateTimeImmutable;
 use DateTimeInterface;
+use InvalidArgumentException;
 
 class HolidayProvider
 {
@@ -534,6 +535,10 @@ class HolidayProvider
         DateTimeInterface $dateTime,
         int $incrementByDays
     ): DateTimeImmutable {
+        if ($incrementByDays < 1) {
+            throw new InvalidArgumentException('Increment days must be higher than 0');
+        }
+
         $daysWithoutHolidaysAndWeekends = 0;
         $nonImmutable = new DateTime($dateTime->format('Y-m-d H:i:s'));
 
