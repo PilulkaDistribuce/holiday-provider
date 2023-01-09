@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace HolidayProvider;
 
+use DateTime;
+use DateTimeImmutable;
 use DateTimeInterface;
+use InvalidArgumentException;
 
 class HolidayProvider
 {
@@ -526,5 +529,28 @@ class HolidayProvider
     public function findAllHolidays(): array
     {
         return $this->holidays;
+    }
+
+    public function getDateIncrementedByHolidaysAndWeekends(
+        DateTimeInterface $dateTime,
+        int $incrementByDays
+    ): DateTimeImmutable {
+        if ($incrementByDays < 1) {
+            throw new InvalidArgumentException('Increment days must be higher than 0');
+        }
+
+        $daysWithoutHolidaysAndWeekends = 0;
+        $nonImmutable = new DateTime($dateTime->format('Y-m-d H:i:s'));
+
+        do {
+            $nonImmutable->modify('+1 day');
+
+            if ($this->isWeekendOrHoliday($nonImmutable) === false) {
+                $daysWithoutHolidaysAndWeekends++;
+            }
+
+        } while ($daysWithoutHolidaysAndWeekends < $incrementByDays);
+
+        return new DateTimeImmutable($nonImmutable->format('Y-m-d H:i:s'));
     }
 }

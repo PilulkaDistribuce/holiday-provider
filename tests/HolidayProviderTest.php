@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace ProfiSmsPhpSender\Tests;
 
 use DateTime;
+use DateTimeImmutable;
 use DateTimeInterface;
 use HolidayProvider\HolidayProvider;
 use HolidayProvider\HolidayProviderException;
@@ -23,10 +24,7 @@ class HolidayProviderTest extends TestCase
     /** @var HolidayProvider */
     private $holidayProviderRo;
 
-    /**
-     * @return void
-     */
-    public function setUp()
+    public function setUp(): void
     {
         $this->holidayProviderCz = new HolidayProvider(HolidayProvider::COUNTRY_CZ);
         $this->holidayProviderSk = new HolidayProvider(HolidayProvider::COUNTRY_SK);
@@ -177,5 +175,30 @@ class HolidayProviderTest extends TestCase
 
             file_put_contents('data.txt', $holidayDates, FILE_APPEND);
         }
+    }
+
+    /**
+     * @param DateTimeInterface $dateTime
+     * @param int $incrementByDays
+     * @param DateTimeImmutable $expectedResult
+     * @dataProvider provideDateTimeForIncrementedByHolidaysAndWeekends
+     */
+    public function testGetDateIncrementedByHolidaysAndWeekends(
+        DateTimeInterface $dateTime,
+        int $incrementByDays,
+        DateTimeImmutable $expectedResult
+    ): void {
+        $this->assertEquals(
+            $expectedResult,
+            $this->holidayProviderCz->getDateIncrementedByHolidaysAndWeekends($dateTime, $incrementByDays)
+        );
+    }
+
+    public function provideDateTimeForIncrementedByHolidaysAndWeekends(): array
+    {
+        return [
+            'weekend over new year' => [new DateTimeImmutable('2021-12-31'), 2, new DateTimeImmutable('2022-01-04')],
+            '2023 workers day' => [new DateTimeImmutable('2023-04-30'), 3, new DateTimeImmutable('2023-05-04')],
+        ];
     }
 }

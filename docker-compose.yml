@@ -1,11 +1,11 @@
 version: "3"
 services:
-    app71:
+    app81:
         build:
             context: .
-            dockerfile: ./Dockerfile71
+            dockerfile: ./Dockerfile81
         ports:
-            - "8071:80"
+            - "8081:80"
         volumes:
             - .:/var/www/html
         environment:
