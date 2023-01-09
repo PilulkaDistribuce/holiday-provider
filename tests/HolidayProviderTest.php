@@ -23,10 +23,7 @@ class HolidayProviderTest extends TestCase
     /** @var HolidayProvider */
     private $holidayProviderRo;
 
-    /**
-     * @return void
-     */
-    public function setUp()
+    public function setUp(): void
     {
         $this->holidayProviderCz = new HolidayProvider(HolidayProvider::COUNTRY_CZ);
         $this->holidayProviderSk = new HolidayProvider(HolidayProvider::COUNTRY_SK);

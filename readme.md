@@ -17,6 +17,6 @@ $isHolidayOrWeekendBoolean = $provider->isWeekendOrHoliday(new DateTime());
 
 ```bash
 docker-compose up -d 
-docker exec -it holiday-provider_app71_1 vendor/bin/phpunit tests
 docker exec -it holiday-provider_app80_1 vendor/bin/phpunit tests
+docker exec -it holiday-provider_app81_1 vendor/bin/phpunit tests
 ```
