@@ -470,7 +470,7 @@ class HolidayProvider
     ];
 
     /** @var array<string, string> */
-    private $holidays;
+    private array $holidays;
 
     /**
      * @param string $country
@@ -496,7 +496,7 @@ class HolidayProvider
             case self::COUNTRY_DE:
             case self::COUNTRY_HU:
             case self::COUNTRY_AT:
-                $this->holidays = [];
+                $this->holidays = []; // TODO add holidays for HU and AT
                 break;
             case self::COUNTRY_RO:
             case 'RO':
@@ -510,7 +510,7 @@ class HolidayProvider
 
     public function isHoliday(DateTimeInterface $dateTime): bool
     {
-        return in_array($dateTime->format('Y-m-d'), $this->holidays);
+        return in_array($dateTime->format('Y-m-d'), $this->holidays, true);
     }
 
     public function isWeekendOrHoliday(DateTimeInterface $dateTime): bool
@@ -531,13 +531,14 @@ class HolidayProvider
         return $this->holidays;
     }
 
+    /**
+     * @throws HolidayProviderException
+     */
     public function getDateIncrementedByHolidaysAndWeekends(
         DateTimeInterface $dateTime,
         int $incrementByDays
     ): DateTimeImmutable {
-        if ($incrementByDays < 1 || $incrementByDays > 99999) {
-            throw new InvalidArgumentException('Increment days must be higher than 0');
-        }
+        $this->checkIfInBounds($incrementByDays);
 
         $daysWithoutHolidaysAndWeekends = 0;
         $nonImmutable = new DateTime($dateTime->format('Y-m-d H:i:s'));
@@ -552,5 +553,40 @@ class HolidayProvider
         } while ($daysWithoutHolidaysAndWeekends < $incrementByDays);
 
         return new DateTimeImmutable($nonImmutable->format('Y-m-d H:i:s'));
+    }
+
+    /**
+     * @throws HolidayProviderException
+     */
+    public function getDateIncrementedByHolidaysAndOpenDays(
+        DateTimeInterface $dateTime,
+        int $incrementByDays,
+        OpenDaysDTO $openDays
+    ): DateTimeImmutable {
+        $this->checkIfInBounds($incrementByDays);
+
+        $daysWithoutHolidaysAndClosedDays = 0;
+        $nonImmutable = new DateTime($dateTime->format('Y-m-d H:i:s'));
+
+        do {
+            $nonImmutable->modify('+1 day');
+
+            if (!$this->isHoliday($nonImmutable) && $openDays->isOpen($nonImmutable)) {
+                $daysWithoutHolidaysAndClosedDays++;
+            }
+
+        } while ($daysWithoutHolidaysAndClosedDays < $incrementByDays);
+
+        return new DateTimeImmutable($nonImmutable->format('Y-m-d H:i:s'));
+    }
+
+    /**
+     * @throws HolidayProviderException
+     */
+    private function checkIfInBounds(int $incrementByDays): void
+    {
+        if ($incrementByDays < 1 || $incrementByDays > 99999) {
+            throw new HolidayProviderException('Increment days must be higher than 0');
+        }
     }
 }

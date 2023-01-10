@@ -9,20 +9,16 @@ use DateTimeImmutable;
 use DateTimeInterface;
 use HolidayProvider\HolidayProvider;
 use HolidayProvider\HolidayProviderException;
+use HolidayProvider\OpenDaysDTO;
 use PHPUnit\Framework\TestCase;
 use Yasumi\Holiday;
 use Yasumi\Yasumi;
 
 class HolidayProviderTest extends TestCase
 {
-    /** @var HolidayProvider */
-    private $holidayProviderCz;
-
-    /** @var HolidayProvider */
-    private $holidayProviderSk;
-
-    /** @var HolidayProvider */
-    private $holidayProviderRo;
+    private HolidayProvider $holidayProviderCz;
+    private HolidayProvider $holidayProviderSk;
+    private HolidayProvider $holidayProviderRo;
 
     public function setUp(): void
     {
@@ -32,11 +28,7 @@ class HolidayProviderTest extends TestCase
     }
 
     /**
-     * @param string $country
-     * @param string $expectedExceptionClass
-     *
      * @dataProvider provideWrongCountriesException
-     * @throws HolidayProviderException
      */
     public function testWrongCountriesException(string $country, string $expectedExceptionClass): void
     {
@@ -58,9 +50,6 @@ class HolidayProviderTest extends TestCase
     }
 
     /**
-     * @param DateTime $dateTime
-     * @param bool $expectedResult
-     *
      * @dataProvider provideIsCzechHoliday
      */
     public function testIsCzechHoliday(DateTime $dateTime, bool $expectedResult): void
@@ -86,9 +75,6 @@ class HolidayProviderTest extends TestCase
     }
 
     /**
-     * @param DateTime $dateTime
-     * @param bool $expectedResult
-     *
      * @dataProvider provideIsWeekendOrHoliday
      */
     public function testIsWeekendOrHoliday(DateTime $dateTime, bool $expectedResult): void
@@ -110,9 +96,6 @@ class HolidayProviderTest extends TestCase
     }
 
     /**
-     * @param DateTime $dateTime
-     * @param bool $expectedResult
-     *
      * @dataProvider provideIsSlovakHoliday
      */
     public function testIsSlovakHoliday(DateTime $dateTime, bool $expectedResult): void
@@ -138,9 +121,6 @@ class HolidayProviderTest extends TestCase
     }
 
     /**
-     * @param DateTime $dateTime
-     * @param bool $expectedResult
-     *
      * @dataProvider provideIsRomaniaHoliday
      */
     public function testIsRomaniaHoliday(DateTime $dateTime, bool $expectedResult): void
@@ -178,9 +158,6 @@ class HolidayProviderTest extends TestCase
     }
 
     /**
-     * @param DateTimeInterface $dateTime
-     * @param int $incrementByDays
-     * @param DateTimeImmutable $expectedResult
      * @dataProvider provideDateTimeForIncrementedByHolidaysAndWeekends
      */
     public function testGetDateIncrementedByHolidaysAndWeekends(
@@ -201,5 +178,91 @@ class HolidayProviderTest extends TestCase
             '2023 workers day' => [new DateTimeImmutable('2023-04-30'), 3, new DateTimeImmutable('2023-05-04')],
             'max increment' => [new DateTimeImmutable('2023-04-30'), 99999, new DateTimeImmutable('2406-12-06')],
         ];
+    }
+
+    /**
+     * @dataProvider provideDateTimeForIncrementedByHolidaysAndOpenDays
+     */
+    public function testGetDateIncrementedByHolidaysAndOpenDays(
+        DateTimeInterface $dateTime,
+        int $incrementByDays,
+        OpenDaysDTO $openDays,
+        DateTimeImmutable $expectedResult
+    ): void {
+        $this->assertEquals(
+            $expectedResult,
+            $this->holidayProviderCz->getDateIncrementedByHolidaysAndOpenDays(
+                $dateTime,
+                $incrementByDays,
+                $openDays
+            )
+        );
+    }
+
+    public function provideDateTimeForIncrementedByHolidaysAndOpenDays(): array
+    {
+        return [
+            'weekend over new year' => [
+                new DateTimeImmutable('2021-12-31'),
+                2,
+                new OpenDaysDTO(),
+                new DateTimeImmutable('2022-01-03'),
+            ],
+            '2023 workers day' => [
+                new DateTimeImmutable('2023-04-30'),
+                3,
+                new OpenDaysDTO(false, false),
+                new DateTimeImmutable('2023-05-05'),
+            ],
+            'one day opened' => [
+                new DateTimeImmutable('2023-04-30'),
+                9,
+                new OpenDaysDTO(true, false, false, false, false, false, false),
+                new DateTimeImmutable('2023-07-10'),
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider provideDateTimeForExceptions
+     */
+    public function testGetDateIncrementedByHolidaysAndOpenDaysExceptions(
+        DateTimeInterface $dateTime,
+        int $incrementByDays,
+        OpenDaysDTO $openDays,
+    ): void {
+        $this->expectException(HolidayProviderException::class);
+        $this->holidayProviderCz->getDateIncrementedByHolidaysAndOpenDays(
+            $dateTime,
+            $incrementByDays,
+            $openDays
+        );
+    }
+
+    public function provideDateTimeForExceptions(): array
+    {
+        return [
+            'zero days' => [
+                new DateTimeImmutable('2023-04-30'),
+                0,
+                new OpenDaysDTO(),
+            ],
+            'negative days' => [
+                new DateTimeImmutable('2023-04-30'),
+                -9,
+                new OpenDaysDTO(),
+            ],
+            'too long calculation' => [
+                new DateTimeImmutable('2023-04-30'),
+                123456,
+                new OpenDaysDTO(),
+            ],
+        ];
+    }
+    
+    public function testAllClosedDays(): void
+    {
+        $this->expectException(HolidayProviderException::class);
+        new OpenDaysDTO(false, false, false, false, false, false, false);
     }
 }
