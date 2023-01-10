@@ -19,12 +19,16 @@ class HolidayProviderTest extends TestCase
     private HolidayProvider $holidayProviderCz;
     private HolidayProvider $holidayProviderSk;
     private HolidayProvider $holidayProviderRo;
+    private HolidayProvider $holidayProviderAt;
+    private HolidayProvider $holidayProviderHu;
 
     public function setUp(): void
     {
         $this->holidayProviderCz = new HolidayProvider(HolidayProvider::COUNTRY_CZ);
         $this->holidayProviderSk = new HolidayProvider(HolidayProvider::COUNTRY_SK);
         $this->holidayProviderRo = new HolidayProvider(HolidayProvider::COUNTRY_RO);
+        $this->holidayProviderAt = new HolidayProvider(HolidayProvider::COUNTRY_AT);
+        $this->holidayProviderHu = new HolidayProvider(HolidayProvider::COUNTRY_HU);
     }
 
     /**
@@ -143,11 +147,46 @@ class HolidayProviderTest extends TestCase
         ];
     }
 
+    /**
+     * @dataProvider provideIsHungaryHoliday
+     */
+    public function testIsHungaryHoliday(DateTime $dateTime, bool $expectedResult): void
+    {
+        $this->assertSame($expectedResult, $this->holidayProviderHu->isHoliday($dateTime));
+    }
+
+    /**
+     * @return array<string, array<DateTimeInterface|bool>>
+     */
+    public function provideIsHungaryHoliday(): array
+    {
+        return [
+            '2023 Memorial day of the 1848 Revolution' => [new DateTime('2023-03-15'), true],
+        ];
+    }
+
+    /**
+     * @dataProvider provideIsAustriaHoliday
+     */
+    public function testIsAustriaHoliday(DateTime $dateTime, bool $expectedResult): void
+    {
+        $this->assertSame($expectedResult, $this->holidayProviderAt->isHoliday($dateTime));
+    }
+
+    /**
+     * @return array<string, array<DateTimeInterface|bool>>
+     */
+    public function provideIsAustriaHoliday(): array
+    {
+        return [
+            '2023 Epiphany' => [new DateTime('2023-01-06'), true],
+        ];
+    }
+
     public function scriptDownloadHolidaysFromYasumi(): void
     {
         foreach (range(2021, 2030) as $year) {
-            $holidayDates = Yasumi::create('Slovakia', $year)->getHolidays();
-            var_dump($holidayDates);
+            $holidayDates = Yasumi::create('CzechRepublic', $year)->getHolidays();
             $holidayDates = array_map(function (Holiday $holiday): string {
                 return '\''.$holiday->format('Y').' '.str_replace('\'', '\\\'', $holiday->getName())
                     .'\' => \''.$holiday->format('Y-m-d').'\','.PHP_EOL;
