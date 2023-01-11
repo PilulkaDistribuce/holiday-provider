@@ -7,7 +7,6 @@ namespace HolidayProvider;
 use DateTime;
 use DateTimeImmutable;
 use DateTimeInterface;
-use InvalidArgumentException;
 
 class HolidayProvider
 {
@@ -15,7 +14,6 @@ class HolidayProvider
     public const COUNTRY_SK = 'sk';
     public const COUNTRY_RO = 'ro';
     public const COUNTRY_AT = 'at';
-    public const COUNTRY_DE = 'de';
     public const COUNTRY_HU = 'hu';
 
     private const HOLIDAYS_CZ = [
@@ -469,8 +467,295 @@ class HolidayProvider
         '2030 Second Christmas Day' => '2030-12-26',
     ];
 
+    public const HOLIDAYS_AT = [
+        '2021 New Year\'s Day' => '2021-01-01',
+        '2021 Epiphany' => '2021-01-06',
+        '2021 Easter Sunday' => '2021-04-04',
+        '2021 Easter Monday' => '2021-04-05',
+        '2021 International Workers\' Day' => '2021-05-01',
+        '2021 Ascension Day' => '2021-05-13',
+        '2021 Whitsunday' => '2021-05-23',
+        '2021 Whitmonday' => '2021-05-24',
+        '2021 Corpus Christi' => '2021-06-03',
+        '2021 Assumption of Mary' => '2021-08-15',
+        '2021 nationalDay' => '2021-10-26',
+        '2021 All Saints\' Day' => '2021-11-01',
+        '2021 Immaculate Conception' => '2021-12-08',
+        '2021 Christmas' => '2021-12-25',
+        '2021 Second Christmas Day' => '2021-12-26',
+        '2022 New Year\'s Day' => '2022-01-01',
+        '2022 Epiphany' => '2022-01-06',
+        '2022 Easter Sunday' => '2022-04-17',
+        '2022 Easter Monday' => '2022-04-18',
+        '2022 International Workers\' Day' => '2022-05-01',
+        '2022 Ascension Day' => '2022-05-26',
+        '2022 Whitsunday' => '2022-06-05',
+        '2022 Whitmonday' => '2022-06-06',
+        '2022 Corpus Christi' => '2022-06-16',
+        '2022 Assumption of Mary' => '2022-08-15',
+        '2022 nationalDay' => '2022-10-26',
+        '2022 All Saints\' Day' => '2022-11-01',
+        '2022 Immaculate Conception' => '2022-12-08',
+        '2022 Christmas' => '2022-12-25',
+        '2022 Second Christmas Day' => '2022-12-26',
+        '2023 New Year\'s Day' => '2023-01-01',
+        '2023 Epiphany' => '2023-01-06',
+        '2023 Easter Sunday' => '2023-04-09',
+        '2023 Easter Monday' => '2023-04-10',
+        '2023 International Workers\' Day' => '2023-05-01',
+        '2023 Ascension Day' => '2023-05-18',
+        '2023 Whitsunday' => '2023-05-28',
+        '2023 Whitmonday' => '2023-05-29',
+        '2023 Corpus Christi' => '2023-06-08',
+        '2023 Assumption of Mary' => '2023-08-15',
+        '2023 nationalDay' => '2023-10-26',
+        '2023 All Saints\' Day' => '2023-11-01',
+        '2023 Immaculate Conception' => '2023-12-08',
+        '2023 Christmas' => '2023-12-25',
+        '2023 Second Christmas Day' => '2023-12-26',
+        '2024 New Year\'s Day' => '2024-01-01',
+        '2024 Epiphany' => '2024-01-06',
+        '2024 Easter Sunday' => '2024-03-31',
+        '2024 Easter Monday' => '2024-04-01',
+        '2024 International Workers\' Day' => '2024-05-01',
+        '2024 Ascension Day' => '2024-05-09',
+        '2024 Whitsunday' => '2024-05-19',
+        '2024 Whitmonday' => '2024-05-20',
+        '2024 Corpus Christi' => '2024-05-30',
+        '2024 Assumption of Mary' => '2024-08-15',
+        '2024 nationalDay' => '2024-10-26',
+        '2024 All Saints\' Day' => '2024-11-01',
+        '2024 Immaculate Conception' => '2024-12-08',
+        '2024 Christmas' => '2024-12-25',
+        '2024 Second Christmas Day' => '2024-12-26',
+        '2025 New Year\'s Day' => '2025-01-01',
+        '2025 Epiphany' => '2025-01-06',
+        '2025 Easter Sunday' => '2025-04-20',
+        '2025 Easter Monday' => '2025-04-21',
+        '2025 International Workers\' Day' => '2025-05-01',
+        '2025 Ascension Day' => '2025-05-29',
+        '2025 Whitsunday' => '2025-06-08',
+        '2025 Whitmonday' => '2025-06-09',
+        '2025 Corpus Christi' => '2025-06-19',
+        '2025 Assumption of Mary' => '2025-08-15',
+        '2025 nationalDay' => '2025-10-26',
+        '2025 All Saints\' Day' => '2025-11-01',
+        '2025 Immaculate Conception' => '2025-12-08',
+        '2025 Christmas' => '2025-12-25',
+        '2025 Second Christmas Day' => '2025-12-26',
+        '2026 New Year\'s Day' => '2026-01-01',
+        '2026 Epiphany' => '2026-01-06',
+        '2026 Easter Sunday' => '2026-04-05',
+        '2026 Easter Monday' => '2026-04-06',
+        '2026 International Workers\' Day' => '2026-05-01',
+        '2026 Ascension Day' => '2026-05-14',
+        '2026 Whitsunday' => '2026-05-24',
+        '2026 Whitmonday' => '2026-05-25',
+        '2026 Corpus Christi' => '2026-06-04',
+        '2026 Assumption of Mary' => '2026-08-15',
+        '2026 nationalDay' => '2026-10-26',
+        '2026 All Saints\' Day' => '2026-11-01',
+        '2026 Immaculate Conception' => '2026-12-08',
+        '2026 Christmas' => '2026-12-25',
+        '2026 Second Christmas Day' => '2026-12-26',
+        '2027 New Year\'s Day' => '2027-01-01',
+        '2027 Epiphany' => '2027-01-06',
+        '2027 Easter Sunday' => '2027-03-28',
+        '2027 Easter Monday' => '2027-03-29',
+        '2027 International Workers\' Day' => '2027-05-01',
+        '2027 Ascension Day' => '2027-05-06',
+        '2027 Whitsunday' => '2027-05-16',
+        '2027 Whitmonday' => '2027-05-17',
+        '2027 Corpus Christi' => '2027-05-27',
+        '2027 Assumption of Mary' => '2027-08-15',
+        '2027 nationalDay' => '2027-10-26',
+        '2027 All Saints\' Day' => '2027-11-01',
+        '2027 Immaculate Conception' => '2027-12-08',
+        '2027 Christmas' => '2027-12-25',
+        '2027 Second Christmas Day' => '2027-12-26',
+        '2028 New Year\'s Day' => '2028-01-01',
+        '2028 Epiphany' => '2028-01-06',
+        '2028 Easter Sunday' => '2028-04-16',
+        '2028 Easter Monday' => '2028-04-17',
+        '2028 International Workers\' Day' => '2028-05-01',
+        '2028 Ascension Day' => '2028-05-25',
+        '2028 Whitsunday' => '2028-06-04',
+        '2028 Whitmonday' => '2028-06-05',
+        '2028 Corpus Christi' => '2028-06-15',
+        '2028 Assumption of Mary' => '2028-08-15',
+        '2028 nationalDay' => '2028-10-26',
+        '2028 All Saints\' Day' => '2028-11-01',
+        '2028 Immaculate Conception' => '2028-12-08',
+        '2028 Christmas' => '2028-12-25',
+        '2028 Second Christmas Day' => '2028-12-26',
+        '2029 New Year\'s Day' => '2029-01-01',
+        '2029 Epiphany' => '2029-01-06',
+        '2029 Easter Sunday' => '2029-04-01',
+        '2029 Easter Monday' => '2029-04-02',
+        '2029 International Workers\' Day' => '2029-05-01',
+        '2029 Ascension Day' => '2029-05-10',
+        '2029 Whitsunday' => '2029-05-20',
+        '2029 Whitmonday' => '2029-05-21',
+        '2029 Corpus Christi' => '2029-05-31',
+        '2029 Assumption of Mary' => '2029-08-15',
+        '2029 nationalDay' => '2029-10-26',
+        '2029 All Saints\' Day' => '2029-11-01',
+        '2029 Immaculate Conception' => '2029-12-08',
+        '2029 Christmas' => '2029-12-25',
+        '2029 Second Christmas Day' => '2029-12-26',
+        '2030 New Year\'s Day' => '2030-01-01',
+        '2030 Epiphany' => '2030-01-06',
+        '2030 Easter Sunday' => '2030-04-21',
+        '2030 Easter Monday' => '2030-04-22',
+        '2030 International Workers\' Day' => '2030-05-01',
+        '2030 Ascension Day' => '2030-05-30',
+        '2030 Whitsunday' => '2030-06-09',
+        '2030 Whitmonday' => '2030-06-10',
+        '2030 Corpus Christi' => '2030-06-20',
+        '2030 Assumption of Mary' => '2030-08-15',
+        '2030 nationalDay' => '2030-10-26',
+        '2030 All Saints\' Day' => '2030-11-01',
+        '2030 Immaculate Conception' => '2030-12-08',
+        '2030 Christmas' => '2030-12-25',
+        '2030 Second Christmas Day' => '2030-12-26',
+    ];
+    
+    
+    public const HOLIDAYS_HU = [
+        '2021 New Year\'s Day' => '2021-01-01',
+        '2021 Memorial day of the 1848 Revolution' => '2021-03-15',
+        '2021 Good Friday' => '2021-04-02',
+        '2021 Easter Sunday' => '2021-04-04',
+        '2021 Easter Monday' => '2021-04-05',
+        '2021 International Workers\' Day' => '2021-05-01',
+        '2021 Whitsunday' => '2021-05-23',
+        '2021 Whitmonday' => '2021-05-24',
+        '2021 State Foundation Day' => '2021-08-20',
+        '2021 Memorial day of the 1956 Revolution' => '2021-10-23',
+        '2021 All Saints\' Day' => '2021-11-01',
+        '2021 Christmas' => '2021-12-25',
+        '2021 Second Christmas Day' => '2021-12-26',
+        '2022 New Year\'s Day' => '2022-01-01',
+        '2022 Memorial day of the 1848 Revolution' => '2022-03-15',
+        '2022 Good Friday' => '2022-04-15',
+        '2022 Easter Sunday' => '2022-04-17',
+        '2022 Easter Monday' => '2022-04-18',
+        '2022 International Workers\' Day' => '2022-05-01',
+        '2022 Whitsunday' => '2022-06-05',
+        '2022 Whitmonday' => '2022-06-06',
+        '2022 State Foundation Day' => '2022-08-20',
+        '2022 Memorial day of the 1956 Revolution' => '2022-10-23',
+        '2022 All Saints\' Day' => '2022-11-01',
+        '2022 Christmas' => '2022-12-25',
+        '2022 Second Christmas Day' => '2022-12-26',
+        '2023 New Year\'s Day' => '2023-01-01',
+        '2023 Memorial day of the 1848 Revolution' => '2023-03-15',
+        '2023 Good Friday' => '2023-04-07',
+        '2023 Easter Sunday' => '2023-04-09',
+        '2023 Easter Monday' => '2023-04-10',
+        '2023 International Workers\' Day' => '2023-05-01',
+        '2023 Whitsunday' => '2023-05-28',
+        '2023 Whitmonday' => '2023-05-29',
+        '2023 State Foundation Day' => '2023-08-20',
+        '2023 Memorial day of the 1956 Revolution' => '2023-10-23',
+        '2023 All Saints\' Day' => '2023-11-01',
+        '2023 Christmas' => '2023-12-25',
+        '2023 Second Christmas Day' => '2023-12-26',
+        '2024 New Year\'s Day' => '2024-01-01',
+        '2024 Memorial day of the 1848 Revolution' => '2024-03-15',
+        '2024 Good Friday' => '2024-03-29',
+        '2024 Easter Sunday' => '2024-03-31',
+        '2024 Easter Monday' => '2024-04-01',
+        '2024 International Workers\' Day' => '2024-05-01',
+        '2024 Whitsunday' => '2024-05-19',
+        '2024 Whitmonday' => '2024-05-20',
+        '2024 State Foundation Day' => '2024-08-20',
+        '2024 Memorial day of the 1956 Revolution' => '2024-10-23',
+        '2024 All Saints\' Day' => '2024-11-01',
+        '2024 Christmas' => '2024-12-25',
+        '2024 Second Christmas Day' => '2024-12-26',
+        '2025 New Year\'s Day' => '2025-01-01',
+        '2025 Memorial day of the 1848 Revolution' => '2025-03-15',
+        '2025 Good Friday' => '2025-04-18',
+        '2025 Easter Sunday' => '2025-04-20',
+        '2025 Easter Monday' => '2025-04-21',
+        '2025 International Workers\' Day' => '2025-05-01',
+        '2025 Whitsunday' => '2025-06-08',
+        '2025 Whitmonday' => '2025-06-09',
+        '2025 State Foundation Day' => '2025-08-20',
+        '2025 Memorial day of the 1956 Revolution' => '2025-10-23',
+        '2025 All Saints\' Day' => '2025-11-01',
+        '2025 Christmas' => '2025-12-25',
+        '2025 Second Christmas Day' => '2025-12-26',
+        '2026 New Year\'s Day' => '2026-01-01',
+        '2026 Memorial day of the 1848 Revolution' => '2026-03-15',
+        '2026 Good Friday' => '2026-04-03',
+        '2026 Easter Sunday' => '2026-04-05',
+        '2026 Easter Monday' => '2026-04-06',
+        '2026 International Workers\' Day' => '2026-05-01',
+        '2026 Whitsunday' => '2026-05-24',
+        '2026 Whitmonday' => '2026-05-25',
+        '2026 State Foundation Day' => '2026-08-20',
+        '2026 Memorial day of the 1956 Revolution' => '2026-10-23',
+        '2026 All Saints\' Day' => '2026-11-01',
+        '2026 Christmas' => '2026-12-25',
+        '2026 Second Christmas Day' => '2026-12-26',
+        '2027 New Year\'s Day' => '2027-01-01',
+        '2027 Memorial day of the 1848 Revolution' => '2027-03-15',
+        '2027 Good Friday' => '2027-03-26',
+        '2027 Easter Sunday' => '2027-03-28',
+        '2027 Easter Monday' => '2027-03-29',
+        '2027 International Workers\' Day' => '2027-05-01',
+        '2027 Whitsunday' => '2027-05-16',
+        '2027 Whitmonday' => '2027-05-17',
+        '2027 State Foundation Day' => '2027-08-20',
+        '2027 Memorial day of the 1956 Revolution' => '2027-10-23',
+        '2027 All Saints\' Day' => '2027-11-01',
+        '2027 Christmas' => '2027-12-25',
+        '2027 Second Christmas Day' => '2027-12-26',
+        '2028 New Year\'s Day' => '2028-01-01',
+        '2028 Memorial day of the 1848 Revolution' => '2028-03-15',
+        '2028 Good Friday' => '2028-04-14',
+        '2028 Easter Sunday' => '2028-04-16',
+        '2028 Easter Monday' => '2028-04-17',
+        '2028 International Workers\' Day' => '2028-05-01',
+        '2028 Whitsunday' => '2028-06-04',
+        '2028 Whitmonday' => '2028-06-05',
+        '2028 State Foundation Day' => '2028-08-20',
+        '2028 Memorial day of the 1956 Revolution' => '2028-10-23',
+        '2028 All Saints\' Day' => '2028-11-01',
+        '2028 Christmas' => '2028-12-25',
+        '2028 Second Christmas Day' => '2028-12-26',
+        '2029 New Year\'s Day' => '2029-01-01',
+        '2029 Memorial day of the 1848 Revolution' => '2029-03-15',
+        '2029 Good Friday' => '2029-03-30',
+        '2029 Easter Sunday' => '2029-04-01',
+        '2029 Easter Monday' => '2029-04-02',
+        '2029 International Workers\' Day' => '2029-05-01',
+        '2029 Whitsunday' => '2029-05-20',
+        '2029 Whitmonday' => '2029-05-21',
+        '2029 State Foundation Day' => '2029-08-20',
+        '2029 Memorial day of the 1956 Revolution' => '2029-10-23',
+        '2029 All Saints\' Day' => '2029-11-01',
+        '2029 Christmas' => '2029-12-25',
+        '2029 Second Christmas Day' => '2029-12-26',
+        '2030 New Year\'s Day' => '2030-01-01',
+        '2030 Memorial day of the 1848 Revolution' => '2030-03-15',
+        '2030 Good Friday' => '2030-04-19',
+        '2030 Easter Sunday' => '2030-04-21',
+        '2030 Easter Monday' => '2030-04-22',
+        '2030 International Workers\' Day' => '2030-05-01',
+        '2030 Whitsunday' => '2030-06-09',
+        '2030 Whitmonday' => '2030-06-10',
+        '2030 State Foundation Day' => '2030-08-20',
+        '2030 Memorial day of the 1956 Revolution' => '2030-10-23',
+        '2030 All Saints\' Day' => '2030-11-01',
+        '2030 Christmas' => '2030-12-25',
+        '2030 Second Christmas Day' => '2030-12-26',
+    ];
+
     /** @var array<string, string> */
-    private $holidays;
+    private array $holidays;
 
     /**
      * @param string $country
@@ -478,39 +763,19 @@ class HolidayProvider
      */
     public function __construct(string $country)
     {
-        switch ($country) {
-            case self::COUNTRY_CZ:
-            case 'CZ':
-            case 'cs':
-            case 'CS':
-            case 'Czechia':
-            case 'CzechRepublic':
-                $this->holidays = self::HOLIDAYS_CZ;
-                break;
-            case self::COUNTRY_SK:
-            case 'SK':
-            case 'Slovakia':
-            case 'SlovakRepublic':
-                $this->holidays = self::HOLIDAYS_SK;
-                break;
-            case self::COUNTRY_DE:
-            case self::COUNTRY_HU:
-            case self::COUNTRY_AT:
-                $this->holidays = [];
-                break;
-            case self::COUNTRY_RO:
-            case 'RO':
-            case 'Romania':
-                $this->holidays = self::HOLIDAYS_RO;
-                break;
-            default:
-                throw new HolidayProviderException('country '.$country.' is not supported');
-        }
+        $this->holidays = match ($country) {
+            self::COUNTRY_CZ, 'CZ', 'cs', 'CS', 'Czechia', 'CzechRepublic' => self::HOLIDAYS_CZ,
+            self::COUNTRY_SK, 'SK', 'Slovakia', 'SlovakRepublic' => self::HOLIDAYS_SK,
+            self::COUNTRY_RO, 'RO', 'Romania' => self::HOLIDAYS_RO,
+            self::COUNTRY_AT, 'AT', 'Austria' => self::HOLIDAYS_AT,
+            self::COUNTRY_HU, 'HU', 'Hungary' => self::HOLIDAYS_HU,
+            default => throw new HolidayProviderException('country ' . $country . ' is not supported'),
+        };
     }
 
     public function isHoliday(DateTimeInterface $dateTime): bool
     {
-        return in_array($dateTime->format('Y-m-d'), $this->holidays);
+        return in_array($dateTime->format('Y-m-d'), $this->holidays, true);
     }
 
     public function isWeekendOrHoliday(DateTimeInterface $dateTime): bool
@@ -531,13 +796,14 @@ class HolidayProvider
         return $this->holidays;
     }
 
+    /**
+     * @throws HolidayProviderException
+     */
     public function getDateIncrementedByHolidaysAndWeekends(
         DateTimeInterface $dateTime,
         int $incrementByDays
     ): DateTimeImmutable {
-        if ($incrementByDays < 1 || $incrementByDays > 99999) {
-            throw new InvalidArgumentException('Increment days must be higher than 0');
-        }
+        $this->checkIfInBounds($incrementByDays);
 
         $daysWithoutHolidaysAndWeekends = 0;
         $nonImmutable = new DateTime($dateTime->format('Y-m-d H:i:s'));
@@ -552,5 +818,40 @@ class HolidayProvider
         } while ($daysWithoutHolidaysAndWeekends < $incrementByDays);
 
         return new DateTimeImmutable($nonImmutable->format('Y-m-d H:i:s'));
+    }
+
+    /**
+     * @throws HolidayProviderException
+     */
+    public function getDateIncrementedByHolidaysAndOpenDays(
+        DateTimeInterface $dateTime,
+        int $incrementByDays,
+        OpenDaysDTO $openDays
+    ): DateTimeImmutable {
+        $this->checkIfInBounds($incrementByDays);
+
+        $daysWithoutHolidaysAndClosedDays = 0;
+        $nonImmutable = new DateTime($dateTime->format('Y-m-d H:i:s'));
+
+        do {
+            $nonImmutable->modify('+1 day');
+
+            if (!$this->isHoliday($nonImmutable) && $openDays->isOpen($nonImmutable)) {
+                $daysWithoutHolidaysAndClosedDays++;
+            }
+
+        } while ($daysWithoutHolidaysAndClosedDays < $incrementByDays);
+
+        return new DateTimeImmutable($nonImmutable->format('Y-m-d H:i:s'));
+    }
+
+    /**
+     * @throws HolidayProviderException
+     */
+    private function checkIfInBounds(int $incrementByDays): void
+    {
+        if ($incrementByDays < 1 || $incrementByDays > 99999) {
+            throw new HolidayProviderException('Increment days must be higher than 0');
+        }
     }
 }
