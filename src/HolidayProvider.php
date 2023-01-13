@@ -347,6 +347,7 @@ class HolidayProvider
         '2022 Second Christmas Day' => '2022-12-26',
         '2023 New Year\'s Day' => '2023-01-01',
         '2023 Day after New Year\'s Day' => '2023-01-02',
+        '2023 Inventory' => '2023-01-16',
         '2023 Union Day / Small Union' => '2023-01-24',
         '2023 Constantin Brâncuși day' => '2023-02-19',
         '2023 Easter Sunday' => '2023-04-16',
