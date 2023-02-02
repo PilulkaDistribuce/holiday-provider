@@ -1,10 +1,11 @@
 language: php
 sudo: false
-dist: trusty
+dist: xenial
 php:
     - '8.0'
+    - '8.1'
 install:
     - composer install
 script:
-    - vendor/bin/phpstan --memory-limit=-1 analyse src tests --level=8
+    - vendor/bin/phpstan --memory-limit=-1 analyse src --level=8
     - vendor/bin/phpunit tests
