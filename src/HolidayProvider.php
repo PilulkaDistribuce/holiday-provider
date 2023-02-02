@@ -768,8 +768,10 @@ class HolidayProvider
             self::COUNTRY_CZ, 'CZ', 'cs', 'CS', 'Czechia', 'CzechRepublic' => self::HOLIDAYS_CZ,
             self::COUNTRY_SK, 'SK', 'Slovakia', 'SlovakRepublic' => self::HOLIDAYS_SK,
             self::COUNTRY_RO, 'RO', 'Romania' => self::HOLIDAYS_RO,
-            self::COUNTRY_AT, 'AT', 'Austria' => self::HOLIDAYS_AT,
-            self::COUNTRY_HU, 'HU', 'Hungary' => self::HOLIDAYS_HU,
+            self::COUNTRY_AT, 'AT', 'Austria' => 
+                array_merge(array_values(self::HOLIDAYS_AT), array_values(self::HOLIDAYS_CZ)),
+            self::COUNTRY_HU, 'HU', 'Hungary' =>
+                array_merge(array_values(self::HOLIDAYS_HU), array_values(self::HOLIDAYS_SK)),
             default => throw new HolidayProviderException('country ' . $country . ' is not supported'),
         };
     }
