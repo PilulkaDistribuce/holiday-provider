@@ -68,13 +68,14 @@ class HolidayProviderTest extends TestCase
     {
         return [
             '2021 friday new year' => [new DateTime('2021-01-01'), true],
-            '2021 saturay - day after new year' => [new DateTime('2021-01-02'), false],
+            '2021 saturday - day after new year' => [new DateTime('2021-01-02'), false],
             '2021 shifting easter green thursday' => [new DateTime('2021-04-01'), false],
             '2021 shifting easter monday' => [new DateTime('2021-04-05'), true],
             '2021 saint Stephen\'s day ' => [new DateTime('2021-12-26'), true],
             '2021 New Years Eve' => [new DateTime('2021-12-31'), false],
             'no holiday saturday' => [new DateTime('2021-09-04'), false],
             'no holiday sunday' => [new DateTime('2021-09-05'), false],
+            '2023 Saints Cyril and Methodius Day' => [new DateTime('2023-07-05'), true],
         ];
     }
 
@@ -125,6 +126,14 @@ class HolidayProviderTest extends TestCase
     }
 
     /**
+     * @dataProvider provideIsSlovakHoliday
+     */
+    public function testIsHuHolidayInSlovakia(DateTime $dateTime, bool $expectedResult): void
+    {
+        $this->assertSame($expectedResult, $this->holidayProviderHu->isHoliday($dateTime));
+    }
+
+    /**
      * @dataProvider provideIsRomaniaHoliday
      */
     public function testIsRomaniaHoliday(DateTime $dateTime, bool $expectedResult): void
@@ -169,6 +178,14 @@ class HolidayProviderTest extends TestCase
      * @dataProvider provideIsAustriaHoliday
      */
     public function testIsAustriaHoliday(DateTime $dateTime, bool $expectedResult): void
+    {
+        $this->assertSame($expectedResult, $this->holidayProviderAt->isHoliday($dateTime));
+    }
+
+    /**
+     * @dataProvider provideIsCzechHoliday
+     */
+    public function testIsCzHolidayInAustria(DateTime $dateTime, bool $expectedResult): void
     {
         $this->assertSame($expectedResult, $this->holidayProviderAt->isHoliday($dateTime));
     }
