@@ -1,8 +1,9 @@
 language: php
 sudo: false
-dist: trusty
+dist: xenial
 php:
     - '8.0'
+    - '8.1'
 install:
     - composer install
 script:
