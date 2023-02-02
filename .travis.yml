@@ -2,7 +2,7 @@ language: php
 sudo: false
 dist: trusty
 php:
-    - '7.1'
+    - '8.0'
 install:
     - composer install
 script:
