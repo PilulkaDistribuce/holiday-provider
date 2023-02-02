@@ -620,8 +620,8 @@ class HolidayProvider
         '2030 Christmas' => '2030-12-25',
         '2030 Second Christmas Day' => '2030-12-26',
     ];
-    
-    
+
+
     public const HOLIDAYS_HU = [
         '2021 New Year\'s Day' => '2021-01-01',
         '2021 Memorial day of the 1848 Revolution' => '2021-03-15',
@@ -768,7 +768,7 @@ class HolidayProvider
             self::COUNTRY_CZ, 'CZ', 'cs', 'CS', 'Czechia', 'CzechRepublic' => self::HOLIDAYS_CZ,
             self::COUNTRY_SK, 'SK', 'Slovakia', 'SlovakRepublic' => self::HOLIDAYS_SK,
             self::COUNTRY_RO, 'RO', 'Romania' => self::HOLIDAYS_RO,
-            self::COUNTRY_AT, 'AT', 'Austria' => 
+            self::COUNTRY_AT, 'AT', 'Austria' =>
                 array_merge(array_values(self::HOLIDAYS_AT), array_values(self::HOLIDAYS_CZ)),
             self::COUNTRY_HU, 'HU', 'Hungary' =>
                 array_merge(array_values(self::HOLIDAYS_HU), array_values(self::HOLIDAYS_SK)),
