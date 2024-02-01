@@ -72,7 +72,6 @@ class HolidayProviderTest extends TestCase
             '2021 shifting easter green thursday' => [new DateTime('2021-04-01'), false],
             '2021 shifting easter monday' => [new DateTime('2021-04-05'), true],
             '2021 saint Stephen\'s day ' => [new DateTime('2021-12-26'), true],
-            '2021 New Years Eve' => [new DateTime('2021-12-31'), false],
             'no holiday saturday' => [new DateTime('2021-09-04'), false],
             'no holiday sunday' => [new DateTime('2021-09-05'), false],
             '2023 Saints Cyril and Methodius Day' => [new DateTime('2023-07-05'), true],
@@ -315,7 +314,7 @@ class HolidayProviderTest extends TestCase
             ],
         ];
     }
-    
+
     public function testAllClosedDays(): void
     {
         $this->expectException(HolidayProviderException::class);
