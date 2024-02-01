@@ -1,8 +1,0 @@
-FROM php:8.0-apache
-
-RUN apt-get update && apt-get install -y git unzip
-
-COPY --from=composer /usr/bin/composer /usr/bin/composer
-COPY . /var/www/html
-
-RUN composer install --dev

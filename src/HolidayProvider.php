@@ -763,7 +763,7 @@ class HolidayProvider
         'hu-2030 Second Christmas Day' => '2030-12-26',
     ];
 
-    /** @var array<string, string> */
+    /** @var array<string|int, string> */
     private array $holidays;
 
     /**
@@ -821,6 +821,30 @@ class HolidayProvider
 
         do {
             $nonImmutable->modify('+1 day');
+
+            if ($this->isWeekendOrHoliday($nonImmutable) === false) {
+                $daysWithoutHolidaysAndWeekends++;
+            }
+
+        } while ($daysWithoutHolidaysAndWeekends < $incrementByDays);
+
+        return new DateTimeImmutable($nonImmutable->format('Y-m-d H:i:s'));
+    }
+
+    /**
+     * @throws HolidayProviderException
+     */
+    public function getDateIncrementedByHolidaysAndWeekendsToThePast(
+        DateTimeInterface $dateTime,
+        int $incrementByDays
+    ): DateTimeImmutable {
+        $this->checkIfInBounds($incrementByDays);
+
+        $daysWithoutHolidaysAndWeekends = 0;
+        $nonImmutable = new DateTime($dateTime->format('Y-m-d H:i:s'));
+
+        do {
+            $nonImmutable->modify('-1 day');
 
             if ($this->isWeekendOrHoliday($nonImmutable) === false) {
                 $daysWithoutHolidaysAndWeekends++;

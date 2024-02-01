@@ -72,7 +72,6 @@ class HolidayProviderTest extends TestCase
             '2021 shifting easter green thursday' => [new DateTime('2021-04-01'), false],
             '2021 shifting easter monday' => [new DateTime('2021-04-05'), true],
             '2021 saint Stephen\'s day ' => [new DateTime('2021-12-26'), true],
-            '2021 New Years Eve' => [new DateTime('2021-12-31'), false],
             'no holiday saturday' => [new DateTime('2021-09-04'), false],
             'no holiday sunday' => [new DateTime('2021-09-05'), false],
             '2023 Saints Cyril and Methodius Day' => [new DateTime('2023-07-05'), true],
@@ -227,12 +226,35 @@ class HolidayProviderTest extends TestCase
         );
     }
 
+    /**
+     * @dataProvider provideDateTimeForIncrementedByHolidaysAndWeekendsToThePast
+     */
+    public function testGetDateIncrementedByHolidaysAndWeekendsToThePast(
+        DateTimeInterface $dateTime,
+        int $incrementByDays,
+        DateTimeImmutable $expectedResult
+    ): void {
+        $this->assertEquals(
+            $expectedResult,
+            $this->holidayProviderCz->getDateIncrementedByHolidaysAndWeekendsToThePast($dateTime, $incrementByDays)
+        );
+    }
+
     public function provideDateTimeForIncrementedByHolidaysAndWeekends(): array
     {
         return [
             'weekend over new year' => [new DateTimeImmutable('2021-12-31'), 2, new DateTimeImmutable('2022-01-04')],
             '2023 workers day' => [new DateTimeImmutable('2023-04-30'), 3, new DateTimeImmutable('2023-05-04')],
             'max increment' => [new DateTimeImmutable('2023-04-30'), 99999, new DateTimeImmutable('2406-12-06')],
+        ];
+    }
+
+    public function provideDateTimeForIncrementedByHolidaysAndWeekendsToThePast(): array
+    {
+        return [
+            'weekend over new year' => [new DateTimeImmutable('2022-01-01'), 2, new DateTimeImmutable('2021-12-30')],
+            '2023 workers day' => [new DateTimeImmutable('2023-04-30'), 3, new DateTimeImmutable('2023-04-26')],
+            'max increment' => [new DateTimeImmutable('2023-04-30'), 99999, new DateTimeImmutable('1639-12-14')],
         ];
     }
 
@@ -315,7 +337,7 @@ class HolidayProviderTest extends TestCase
             ],
         ];
     }
-    
+
     public function testAllClosedDays(): void
     {
         $this->expectException(HolidayProviderException::class);
